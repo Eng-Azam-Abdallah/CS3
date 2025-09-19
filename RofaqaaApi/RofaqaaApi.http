@@ -1,0 +1,6 @@
+@RofaqaaApi_HostAddress = http://localhost:5120
+
+GET {{RofaqaaApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

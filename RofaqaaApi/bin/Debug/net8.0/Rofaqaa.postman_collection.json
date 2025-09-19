@@ -1,0 +1,363 @@
+{
+    "info": {
+        "name": "رفقاء الدرب API",
+        "description": "مجموعة اختبارات API لنظام إدارة المصاريف المشتركة",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:5000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "المصادقة",
+            "item": [
+                {
+                    "name": "تسجيل مستخدم جديد",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"عمر\",\n    \"email\": \"omar@example.com\",\n    \"password\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/register",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "register"]
+                        }
+                    }
+                },
+                {
+                    "name": "تسجيل الدخول",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "if (jsonData.token) {",
+                                    "    pm.environment.set(\"token\", jsonData.token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"azam@example.com\",\n    \"password\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "login"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "المجموعات",
+            "item": [
+                {
+                    "name": "إنشاء مجموعة جديدة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"شقة العائلة\",\n    \"description\": \"مصاريف شقة العائلة الشهرية\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/groups",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "groups"]
+                        }
+                    }
+                },
+                {
+                    "name": "الحصول على قائمة المجموعات",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/groups",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "groups"]
+                        }
+                    }
+                },
+                {
+                    "name": "الحصول على تفاصيل مجموعة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/groups/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "groups", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "تحديث مجموعة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"سكن الطلاب - المبنى الجديد\",\n    \"description\": \"مصاريف السكن المشترك في المبنى الجديد\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/groups/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "groups", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "إضافة عضو للمجموعة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"omar@example.com\",\n    \"role\": \"Member\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/groups/1/members",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "groups", "1", "members"]
+                        }
+                    }
+                },
+                {
+                    "name": "تحديث دور عضو",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"userId\": 5,\n    \"role\": \"Admin\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/groups/1/members",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "groups", "1", "members"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "المصاريف",
+            "item": [
+                {
+                    "name": "إضافة مصروف جديد",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"groupId\": 1,\n    \"description\": \"مشتريات السوبرماركت\",\n    \"amount\": 450,\n    \"category\": \"Food\",\n    \"payments\": [\n        {\n            \"groupMemberId\": 1,\n            \"amount\": 450\n        }\n    ],\n    \"shares\": [\n        {\n            \"groupMemberId\": 1,\n            \"type\": \"Equal\"\n        },\n        {\n            \"groupMemberId\": 2,\n            \"type\": \"Equal\"\n        },\n        {\n            \"groupMemberId\": 3,\n            \"type\": \"Equal\"\n        }\n    ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/expenses",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "expenses"]
+                        }
+                    }
+                },
+                {
+                    "name": "الحصول على مصاريف المجموعة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/expenses?groupId=1",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "expenses"],
+                            "query": [
+                                {
+                                    "key": "groupId",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "التقارير",
+            "item": [
+                {
+                    "name": "ملخص حسابات المجموعة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/reports/group/1/summary",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "reports", "group", "1", "summary"]
+                        }
+                    }
+                },
+                {
+                    "name": "تفاصيل التسويات المطلوبة",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/reports/group/1/settlements",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "reports", "group", "1", "settlements"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

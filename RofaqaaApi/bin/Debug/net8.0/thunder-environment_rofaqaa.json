@@ -1,0 +1,28 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "رفقاء الدرب - محلي",
+    "dateExported": "2025-09-18T23:00:00.000Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "baseUrl",
+            "value": "https://zany-parakeet-v6qp9rp66jjr3wv5x-5120.app.github.dev"
+        },
+        {
+            "name": "token",
+            "value": ""
+        },
+        {
+            "name": "groupId",
+            "value": ""
+        },
+        {
+            "name": "memberId",
+            "value": ""
+        },
+        {
+            "name": "otherMemberId",
+            "value": ""
+        }
+    ]
+}

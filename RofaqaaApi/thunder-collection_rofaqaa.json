@@ -1,0 +1,211 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "رفقاء الدرب",
+    "dateExported": "2025-09-18T23:00:00.000Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "name": "المصادقة",
+            "containerId": "",
+            "created": "2025-09-18T23:00:00.000Z",
+            "sortNum": 10000
+        },
+        {
+            "name": "المجموعات",
+            "containerId": "",
+            "created": "2025-09-18T23:00:00.000Z",
+            "sortNum": 20000
+        },
+        {
+            "name": "المصاريف",
+            "containerId": "",
+            "created": "2025-09-18T23:00:00.000Z",
+            "sortNum": 30000
+        },
+        {
+            "name": "التقارير",
+            "containerId": "",
+            "created": "2025-09-18T23:00:00.000Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "containerId": "المصادقة",
+            "sortNum": 10000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "تسجيل مستخدم جديد",
+            "url": "/api/auth/register",
+            "method": "POST",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z",
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"سارة\",\n  \"email\": \"sara@example.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "containerId": "المصادقة",
+            "sortNum": 20000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "تسجيل الدخول",
+            "url": "/api/auth/login",
+            "method": "POST",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z",
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"sara@example.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "containerId": "المجموعات",
+            "sortNum": 30000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer {{token}}"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "إنشاء مجموعة جديدة",
+            "url": "/api/groups",
+            "method": "POST",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z",
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"رحلة العمرة\",\n  \"description\": \"مصاريف رحلة العمرة المشتركة\"\n}",
+                "form": []
+            }
+        },
+        {
+            "containerId": "المجموعات",
+            "sortNum": 40000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer {{token}}"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "إضافة عضو للمجموعة",
+            "url": "/api/groups/{{groupId}}/members",
+            "method": "POST",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z",
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"ahmed@example.com\",\n  \"role\": \"Member\"\n}",
+                "form": []
+            }
+        },
+        {
+            "containerId": "المصاريف",
+            "sortNum": 50000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer {{token}}"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "إضافة مصروف جديد",
+            "url": "/api/expenses",
+            "method": "POST",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z",
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"groupId\": {{groupId}},\n  \"description\": \"حجز تذاكر الطيران\",\n  \"amount\": 3000,\n  \"category\": \"Travel\",\n  \"payments\": [\n    {\n      \"groupMemberId\": {{memberId}},\n      \"amount\": 3000\n    }\n  ],\n  \"shares\": [\n    {\n      \"groupMemberId\": {{memberId}},\n      \"type\": \"Equal\"\n    },\n    {\n      \"groupMemberId\": {{otherMemberId}},\n      \"type\": \"Equal\"\n    }\n  ]\n}",
+                "form": []
+            }
+        },
+        {
+            "containerId": "التقارير",
+            "sortNum": 60000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer {{token}}"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "ملخص المجموعة",
+            "url": "/api/reports/group/{{groupId}}/summary",
+            "method": "GET",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z"
+        },
+        {
+            "containerId": "التقارير",
+            "sortNum": 70000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer {{token}}"
+                }
+            ],
+            "colId": "رفقاء الدرب",
+            "name": "التسويات المطلوبة",
+            "url": "/api/reports/group/{{groupId}}/settlements",
+            "method": "GET",
+            "modified": "2025-09-18T23:00:00.000Z",
+            "created": "2025-09-18T23:00:00.000Z"
+        }
+    ]
+}
